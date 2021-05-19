@@ -12,64 +12,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-
-    public function showCreateBoat(){
-
-        $clients = Clients::all();
-
-        $packages = Packages::all();
-
-        return view('marina_front.boats.create_boat',compact('clients','packages'));
-
-    }
-
-    public function createBoat(Request $request){
-
-        $names =  json_encode($this->multipleUploads($request,'images','boats'));
-
-
-
-
-
-
-        $boat = Boats::create([
-            'name' => $request->name,
-            'length' => $request->length,
-            'color' => $request->color,
-            'images' => $names,
-            'user_id' => $request->user_id,
-            'package_id' => $request->package_id,
-        ]);
-
-        return view('home');
-
-
-
-    }
-
-    public function showCreatePackage(){
-
-
-
-        return view('marina_front.packages.create_package');
-
-    }
-
-    public function createPackage(Request $request){
-
-
-        $package = Packages::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'rate' => $request->rate
-        ]);
-
-        return view('home');
-
-
-
-    }
-
+    
     public function showCreateInvoice(){
 
         $boats = Boats::all();
@@ -112,7 +55,7 @@ class AdminController extends Controller
 
     public function payInvoice(Request $request){
       $invoice = Invoices::find($request->invoice);
-
+      $is_paid = 0;
       InvoiceLogs::create([
       'invoice_id' => $request->invoice,
       'boat_id' =>$invoice->boat_id,
@@ -122,26 +65,21 @@ class AdminController extends Controller
       'payment_method' => $request->payment_method
       ]);
 
-      $is_paid = 0;
-
-      if($invoice->paid_amount >= $invoice->total){
+     
+      $paid_amount = $invoice->paid_amount + $request->paid_amount;
+      if($paid_amount >= $invoice->total){
           $is_paid = 1;
       }
 
-      $paid_amount = $invoice->paid_amount + $request->paid_amount;
+      
 
 
       $invoice->update(['paid_amount'=> $paid_amount,'is_paid'=> $is_paid,'payment_method' => $request->payment_method]);
       $invoice->save();
+      return redirect()->back()->with('payAlert','The  <strong>Payment operation </strong> done successfully');
+
     }
 
-    public function getInvoice($invoice_id = null){
-
-        if($invoice_id !=  null){
-
-            return Invoices::find($invoice_id);
-        }
-        return [];
-    }
+  
 
 }

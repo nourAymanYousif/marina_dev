@@ -183,7 +183,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\wamp64\\www\\marina\\storage\\framework/cache/data',
+        'path' => 'C:\\wamp64\\www\\Marina_dev\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -350,12 +350,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\wamp64\\www\\marina\\storage\\app',
+        'root' => 'C:\\wamp64\\www\\Marina_dev\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\wamp64\\www\\marina\\storage\\app/public',
+        'root' => 'C:\\wamp64\\www\\Marina_dev\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -372,7 +372,7 @@
     ),
     'links' => 
     array (
-      'C:\\wamp64\\www\\marina\\public\\storage' => 'C:\\wamp64\\www\\marina\\storage\\app/public',
+      'C:\\wamp64\\www\\Marina_dev\\public\\storage' => 'C:\\wamp64\\www\\Marina_dev\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -406,13 +406,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\wamp64\\www\\marina\\storage\\logs/laravel.log',
+        'path' => 'C:\\wamp64\\www\\Marina_dev\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\wamp64\\www\\marina\\storage\\logs/laravel.log',
+        'path' => 'C:\\wamp64\\www\\Marina_dev\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -463,7 +463,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\wamp64\\www\\marina\\storage\\logs/laravel.log',
+        'path' => 'C:\\wamp64\\www\\Marina_dev\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -520,7 +520,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\wamp64\\www\\marina\\resources\\views/vendor/mail',
+        0 => 'C:\\wamp64\\www\\Marina_dev\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -603,7 +603,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\wamp64\\www\\marina\\storage\\framework/sessions',
+    'files' => 'C:\\wamp64\\www\\Marina_dev\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -623,9 +623,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\wamp64\\www\\marina\\resources\\views',
+      0 => 'C:\\wamp64\\www\\Marina_dev\\resources\\views',
     ),
-    'compiled' => 'C:\\wamp64\\www\\marina\\storage\\framework\\views',
+    'compiled' => 'C:\\wamp64\\www\\Marina_dev\\storage\\framework\\views',
   ),
   'flare' => 
   array (

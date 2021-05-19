@@ -20,4 +20,22 @@ class Clients extends Model
         'national_id',
         'nationality'
     ];
+    
+
+    public function boats(){
+
+        return $this->hasMany(Boats::class,'client_id');
+}
+   
+ 
+    public function invoices(){
+
+        return $this->hasMany('App\Models\Invoices','user_id');
+
+    }
+    public function logRecords(){
+
+        return $this->hasMany(InvoiceLogs::class,'client_id');
+
+    }
 }

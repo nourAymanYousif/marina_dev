@@ -90,7 +90,10 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('National ID image') }}</label>
 
                             <div class="col-md-6">
-                                <input id="national_id_image" type="file"  class="form-control @error('national_id_image') is-invalid @enderror" name="national_id_image" value="{{ old('national_id_image') }}" >
+                             <!--   <input id="national_id_image" type="file"  class="form-control @error('national_id_image') is-invalid @enderror" name="national_id_image" value="{{ old('national_id_image') }}" >
+                             -->              
+                             
+                             <input id="images" type="file" multiple class="form-control @error('images') is-invalid @enderror" name="images[]" accept="image/*" value="{{ old('images') }}" required  autofocus>
 
                                 @error('national_id_image')
                                 <span class="invalid-feedback" role="alert">
@@ -108,7 +111,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('National ID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="national_id" type="number"  min="14" max="14" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ old('national_id') }}" required >
+                                <input id="national_id" type="number"  length="14"  class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ old('national_id') }}" required >
 
                                 @error('national_id')
                                 <span class="invalid-feedback" role="alert">
@@ -126,7 +129,7 @@
 
                             <div class="col-md-6">
                                 <select class="form-control " name="nationality" id="nationality">
-                                    <option value="">Please Select Nationality</option>
+                                    <option value="none">Please Select Nationality</option>
                                     <option value="egyptian">Egyptian</option>
                                     <option value="saudi">Saudi</option>
                                     <option value="kuwait">Kuwait</option>

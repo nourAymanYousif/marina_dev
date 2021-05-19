@@ -33,8 +33,7 @@ class ClientsController extends Controller
   }
 
   public function createClient(Request $request){
-      $name = '';
-
+    $names =  json_encode($this->multipleUploads($request,'images','clients'));
     //        dd('test');
 
       $rules = $this->validate($request, [
@@ -52,7 +51,6 @@ class ClientsController extends Controller
 
 
 
-      $name = $this->upload_image($request,'national_id_image','clients');
 
 
 
@@ -64,7 +62,7 @@ class ClientsController extends Controller
       'mobile' => $request->mobile,
       'job_title' => $request->job_title,
       'address' => $request->address,
-      'national_id_image' => $name,
+      'national_id_image' => $names,
       'national_id' => $request->national_id,
       'nationality' => $request->nationality
       ]);
@@ -84,5 +82,70 @@ class ClientsController extends Controller
     }
     
   }
+
+
+  public function getClient($client_id = null){
+    if($client_id != null){
+      $client = Clients::find($client_id);
+  }
+  return view('marina_front.clients.client_info',compact('client'));
+
+  }
+  public function edit($client_id = null){
+
+    $clients = Clients::all();
+    $packages = Packages::all();
+    $client = [];
+    if($client_id != null){
+        $client = Clients::find($client_id);
+    }
+
+    return view('marina_front.clients.edit_client',compact('client','clients','packages'));
+
+  }
+
+
+
+    public function update(Request $request){
+
+   
+      $client= Clients:: find($request->client_id);
+      if(!$client){
+          return redirect()->back()->with('failUpdateMsg','The requested <strong>client Updated</strong> successfully');
+      }else{
+
+        if($request-> images != null){
+         $names =  json_encode($this->multipleUploads($request,'images','clients'));
+
+          $client-> update([
+            'name' => $request->name,
+            'email'=> $request->email,
+            'mobile' => $request->mobile,
+            'job_title' => $request->job_title,
+            'address' => $request->address,
+            'national_id_image' => $names,
+            'national_id' => $request->national_id,
+            'nationality' => $request->nationality
+          ]);
+          return redirect()->route('list_client')->with('successupdateMsg','The requested <strong>client Updated</strong> successfully');
+
+      }else{
+          $client-> update([
+            'name' => $request->name,
+            'email'=> $request->email,
+            'mobile' => $request->mobile,
+            'job_title' => $request->job_title,
+            'address' => $request->address,
+            'national_id' => $request->national_id,
+            'nationality' => $request->nationality
+          ]);
+          return redirect()->route('list_client')->with('successupdateMsg','The requested <strong>client Updated</strong> successfully');
+
+
+      }
+
+
+    }}
+
 
 }

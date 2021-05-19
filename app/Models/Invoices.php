@@ -16,9 +16,14 @@ class Invoices extends Model
 
     }
 
-    public function user(){
+    public function client(){
 
-        return $this->belongsTo('App\Models\User','user_id');
+        return $this->belongsTo('App\Models\Clients','user_id');
+
+    }
+    public function logRecords(){
+
+        return $this->hasMany(InvoiceLogs::class,'invoice_id');
 
     }
   

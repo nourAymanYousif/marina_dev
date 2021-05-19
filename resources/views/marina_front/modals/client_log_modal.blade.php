@@ -42,7 +42,10 @@
                                     <td><b>{{$record->paid_amount}} EGP </b> </td>
 
                                     <td><b>{{$record->payment_method}} </b> </td>
+
                                     <td><b> <a href="{{url('/print/record').'/'.$record->id}}" title="print.."  class="btn btn-default "><i class="fa fa-print"></i></a> </td>
+                                    
+                                    
                                     </b> </td>
                                
                           

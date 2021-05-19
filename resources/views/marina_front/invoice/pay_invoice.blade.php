@@ -2,9 +2,21 @@
 
 @section('content')
     <div class="container">
+      
         <div class="row justify-content-center">
             <div class="col-md-8">
+                 @if(Session::has('payAlert'))               
+               
+                    <div class="col-lg-12 " align="center" >
+                       
+                        <div class="alert alert-warning alerty text-left" role="alert" data-auto-dismiss="500">
+                            <strong> <i class="fa fa-exclamation-triangle"></i></strong> {!!Session::get('payAlert')!!}
+                          </div>
+                                     
+                       
+                    </div> @endif
                 <div class="card">
+                   
                     <div class="card-header"> <i class="fa fa-dollar"></i> {{ __('Pay Invoice') }}</div>
 <br>
 
@@ -55,7 +67,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Total') }}</label>
 
                             <div class="col-md-6">
-                                <input id="total" type="number" min="0"  class="form-control @error('color') is-invalid @enderror" name="rate" value="" disabled>
+                                <input id="total" type="number" min="0"  class="form-control @error('color') is-invalid @enderror" name="total" value="" disabled>
 
                                 @error('rate')
                                 <span class="invalid-feedback" role="alert">
@@ -70,7 +82,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Issue Date') }}</label>
 
                             <div class="col-md-6">
-                                <input id="issue_date" type="date" min="0"  class="form-control @error('color') is-invalid @enderror" name="rate" value="" disabled>
+                                <input id="issue_date" type="date" min="0"  class="form-control @error('color') is-invalid @enderror" name="issue_date" value="" disabled>
 
                                 @error('rate')
                                 <span class="invalid-feedback" role="alert">
@@ -131,5 +143,11 @@
 
             });
         })
+   
+    window.setTimeout(function() {
+    $(".alerty").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
     </script>
 @endsection

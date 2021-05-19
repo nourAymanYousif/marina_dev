@@ -8,16 +8,26 @@
 
             <h1>Boats Operations</h1>
         </div>
-       
-        <div class="col-lg-6 " align="center" >
-            @if(Session::has('successDeleteMsg'))               
+        @if(Session::has('successDeleteMsg'))               
                
-            <div class="alert alert-warning alerty text-left" role="alert" data-auto-dismiss="500">
+        <div class="col-lg-6 " align="center" >
+           
+            <div class="alert alert-danger alerty text-left" role="alert" data-auto-dismiss="500">
                 <strong> <i class="fa fa-exclamation-triangle"></i></strong> {!!Session::get('successDeleteMsg')!!}
               </div>
                          
-            @endif
-        </div>
+           
+        </div> @endif
+        @if(Session::has('successupdateMsg'))               
+               
+        <div class="col-lg-6 " align="center" >
+           
+            <div class="alert alert-warning alerty text-left" role="alert" data-auto-dismiss="500">
+                <strong> <i class="fa fa-exclamation-triangle"></i></strong> {!!Session::get('successupdateMsg')!!}
+              </div>
+                         
+           
+        </div> @endif
     </div>
         <hr>
        <br>
@@ -26,20 +36,24 @@
                 <table id="boats_table" class="display">
                     <thead>
                         <tr align="center" >
+                            <th>#</th>
                             <th>Name</th>
                         <th>Length</th>
                         <th>Image</th>
                         <th>Color</th>
-                        <th>User</th>
+                        <th>Client</th>
                         <th>Package</th>
-                        <th>Paid Invoices</th>
-                        <th>Not Paid Invoices</th>
+                       
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                        @php
+                         $counter=1;   
+                        @endphp
                         @foreach($boats as $boat)
                         <tr align="center" >
+                            <td>{{$counter}}</a></td>
                             <td><a href="#">{{$boat->name}}</a></td>
                                 <td>{{$boat->length}}</td>
 
@@ -50,8 +64,43 @@
                                         
                                     @foreach(json_decode($boat->images) as $boat_image)
 
-                                        <img style="width: 50px" src="{{url('/boats')}}/{{$boat_image}}">
 
+
+                                        <img id="myImg{{$boat_image}}" style="width: 50px" src="{{url('/boats')}}/{{$boat_image}}">
+                                            
+                                        <div id="myModal{{$boat_image}}" class="modal">
+                                            <span id="cl{{$boat_image}}"class="close">&times;</span>
+                                            <img class="modal-content" id="img01{{$boat_image}}">
+                                            <div id="caption"></div>
+                                          </div>
+
+                                          <script>
+                                            // Get the modal
+                                            var modal = document.getElementById("myModal{{$boat_image}}");
+                                            
+                                            // Get the image and insert it inside the modal - use its "alt" text as a caption
+                                            var img = document.getElementById("myImg{{$boat_image}}");
+                                            var modalImg = document.getElementById("img01{{$boat_image}}");
+                                            img.onclick = function(){
+                                              modal.style.display = "block";
+                                              modalImg.src = this.src;
+                                              captionText.innerHTML = this.alt;
+                                            }
+                                            
+                                            // Get the <span> element that closes the modal
+                                            var span = document.getElementById("cl{{$boat_image}}");
+                                            
+                                            // When the user clicks on <span> (x), close the modal
+                                            span.onclick = function() { 
+                                              modal.style.display = "none";
+                                            }
+                                            </script>
+
+
+
+                        @php
+                         $counter++;   
+                        @endphp
                                     @endforeach
 
                                 </td>
@@ -62,11 +111,14 @@
                                 </td>
                                 @endif
                                 <td><input type="color" id="favcolor" name="favcolor" value="{{$boat->color}}" disabled></td>
-                                <td>{{$boat->client->name}}</td>
+                                <td> {{$boat->client->name}}</td>
+                                @if($boat->package != null)
                                 <td>{{$boat->package->name}}</td>
+                                @else
+                                <td>Package Deleted</td>
 
-                                <td>{{$payment_array[$boat->id]['paid']}}</td>
-                                <td>{{$payment_array[$boat->id]['not_paid']}}</td>
+                                @endif
+                                
                                 <td dir="rtl">
                                     
                                     <div class="row">

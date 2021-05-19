@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Edit Boat') }}</div>
                     {{--'name','length', 'color', 'images','user_id'--}}
                     <div class="card-body">
-                        <form method="POST" action="{{route('edit_boat')}}">
+                        <form method="POST" action="{{route('edit_boat')}}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -61,7 +61,9 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ $boat->images }}" required  autofocus>
+
+                                    <input id="images" type="file" multiple class="form-control @error('images') is-invalid @enderror" name="images[]" accept="image/*" value="{{ old('images') }}"   autofocus>
+
 
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
@@ -128,6 +130,8 @@
                                     </button>
                                 </div>
                             </div>
+                            <input id="boat_id" type="hidden"  class="form-control @error('length') is-invalid @enderror" name="boat_id" value="{{ $boat->id }}"  >
+
                         </form>
                     </div>
                 </div>

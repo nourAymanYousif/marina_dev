@@ -13,7 +13,7 @@ class Packages extends Model
 
     public function boats(){
 
-        return $this->hasMany('App\Models\Boats','user_id');
+        return $this->hasMany('App\Models\Boats','package_id');
 
     }
 

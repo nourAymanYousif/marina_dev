@@ -7,9 +7,44 @@ use App\Models\Clients;
 use App\Models\Invoices;
 use App\Models\Packages;
 use Illuminate\Http\Request;
+use App\Traits\Uploads;
 
 class BoatsController extends Controller
 {
+    use Uploads;
+    public function showCreateBoat(){
+
+        $clients = Clients::all();
+        $packages = Packages::all();
+
+        return view('marina_front.boats.create_boat',compact('clients','packages'));
+
+    }
+
+    public function createBoat(Request $request){
+
+        $names =  json_encode($this->multipleUploads($request,'images','boats'));
+
+        $boat = Boats::create([
+            'name' => $request->name,
+            'length' => $request->length,
+            'color' => $request->color,
+            'images' => $names,
+            'user_id' => \Auth::user()->id,
+            'client_id' =>$request->user_id ,
+            'package_id' => $request->package_id,
+        ]);
+
+        return view('home');
+    }
+
+    public function showCreatePackage(){
+
+
+
+        return view('marina_front.packages.create_package');
+
+    }
 
     public function index(){
 
@@ -42,7 +77,43 @@ class BoatsController extends Controller
     }
 
 
+    public function update(Request $request){
 
+     
+        $boat= Boats:: find($request->boat_id);
+        if(!$boat){
+            return redirect()->back()->with('failUpdateMsg','The requested <strong>boat Updated</strong> successfully');
+        }else{
+
+//dd('test');
+if($request-> images != null){
+    $names =  json_encode($this->multipleUploads($request,'images','boats'));
+
+            $boat-> update([
+                'name' => $request->name,
+                'length' => $request->length,
+                'color' => $request->color,
+                'images' => $names,
+
+                'package_id' => $request->package_id,
+            ]);
+            return redirect()->route('list_boat')->with('successupdateMsg','The requested <strong>boat Updated</strong> successfully');
+
+        }else{
+            $boat-> update([
+                'name' => $request->name,
+                'length' => $request->length,
+                'color' => $request->color,
+                'package_id' => $request->package_id,
+            ]);
+            return redirect()->route('list_boat')->with('successupdateMsg','The requested <strong>boat Updated</strong> successfully');
+
+
+        }
+  
+  
+      }}
+  
 
 public function delete($boat_id = null){
 

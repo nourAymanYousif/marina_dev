@@ -15,9 +15,7 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 /*
 Route::get('/create_admin', function () {
    User::create(['name'=>'nour','email' =>'n@n.com' ,'password' => Hash::make('123123') ,'national_id' => '123123','type' => 'admin','national_id_image' => 'img.png','mobile' => '123123123123']);
@@ -36,6 +34,7 @@ Auth::routes();
 
 Route::group([ 'middleware' => ['checkadmin']], function () {
 
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // --------------------------------------------------[ Users] -----------------------------------------------
     // Creat User Account (Admin unlinked yet)
@@ -51,10 +50,13 @@ Route::group([ 'middleware' => ['checkadmin']], function () {
     
     //Show Edit client form -- update client
     Route::get('/edit/client/{client_id}', [App\Http\Controllers\ClientsController::class, 'edit']);
-    Route::post('/edit/client', [App\Http\Controllers\ClientsController::class, 'editBoat'])->name('edit_boat');
+    Route::post('/edit/client', [App\Http\Controllers\ClientsController::class, 'update'])->name('edit_client');
    
     // Show All Clients
-    Route::get('/list/clients', [App\Http\Controllers\ClientsController::class, 'index']);
+    Route::get('/list/clients', [App\Http\Controllers\ClientsController::class, 'index'])->name('list_client');
+
+    // Show one Client details
+    Route::get('/client/{client_id}', [App\Http\Controllers\ClientsController::class, 'getClient'])->name('one_client');
 
     //Delete client
     Route::post('/delete/client/{client_id}', [App\Http\Controllers\ClientsController::class, 'delete']);
@@ -64,15 +66,15 @@ Route::group([ 'middleware' => ['checkadmin']], function () {
 
     // --------------------------------------------------[ Boats] -----------------------------------------------
     //Show Boats Form -- create boat
-    Route::get('/create/boat', [App\Http\Controllers\AdminController::class, 'showCreateBoat'])->name('create_boat');
-    Route::post('/create/boat', [App\Http\Controllers\AdminController::class, 'createBoat']);
+    Route::get('/create/boat', [App\Http\Controllers\BoatsController::class, 'showCreateBoat'])->name('create_boat');
+    Route::post('/create/boat', [App\Http\Controllers\BoatsController::class, 'createBoat']);
   
     //Show Edit boat form -- update boat
     Route::get('/edit/boat/{boat_id}', [App\Http\Controllers\BoatsController::class, 'edit']);
-    Route::post('/edit/boat', [App\Http\Controllers\BoatsController::class, 'editBoat'])->name('edit_boat');
+    Route::post('/edit/boat/', [App\Http\Controllers\BoatsController::class, 'update'])->name('edit_boat');
 
     // Show All Boats
-    Route::get('/list/boats', [App\Http\Controllers\BoatsController::class, 'index']);
+    Route::get('/list/boats', [App\Http\Controllers\BoatsController::class, 'index'])->name('list_boat');
 
     //Delete boat                            
     Route::post('/delete/boat/{boat_id}', [App\Http\Controllers\BoatsController::class, 'delete']);
@@ -82,18 +84,18 @@ Route::group([ 'middleware' => ['checkadmin']], function () {
 
     // --------------------------------------------------[ Packages] -----------------------------------------------
     //Show package form -- create Package
-    Route::get('/create/package', [App\Http\Controllers\AdminController::class, 'showCreatePackage'])->name('create_package');
-    Route::post('/create/package', [App\Http\Controllers\AdminController::class, 'createPackage']);
+    Route::get('/create/package', [App\Http\Controllers\PackagesController::class, 'showCreatePackage'])->name('create_package');
+    Route::post('/create/package', [App\Http\Controllers\PackagesController::class, 'createPackage']);
     
     //Show Edit Package form -- update package                      
     Route::get('/edit/package/{package_id}', [App\Http\Controllers\PackagesController::class, 'edit']);
-    Route::post('/edit/package', [App\Http\Controllers\PackagesController::class, 'editPackage'])->name('edit_Package');
+    Route::post('/edit/package', [App\Http\Controllers\PackagesController::class, 'update'])->name('edit_package');
    
     // Show All Packages                                             
-    Route::get('/list/packages', [App\Http\Controllers\PackagesController::class, 'index']);
+    Route::get('/list/packages', [App\Http\Controllers\PackagesController::class, 'index'])->name('list_package');
     
     //Delete Package           ---> must be an admin with privellages                            
-    Route::post('/delete/package/{package_id}', [App\Http\Controllers\PackageController::class, 'delete']);
+    Route::post('/delete/package/{package_id}', [App\Http\Controllers\PackagesController::class, 'delete']);
     
     // Get Specific boat by id 
 
@@ -106,9 +108,14 @@ Route::group([ 'middleware' => ['checkadmin']], function () {
     Route::get('/pay/invoice', [App\Http\Controllers\AdminController::class, 'showPayInvoice'])->name('pay_invoice');
     Route::post('/pay/invoice', [App\Http\Controllers\AdminController::class, 'payInvoice']);
     // Show all invoices
-    Route::get('/list/invoice', [App\Http\Controllers\InvoicesController::class, 'index']);
+    Route::get('/list/invoice', [App\Http\Controllers\InvoicesController::class, 'index'])->name('list_invoice');
 
     // Delete invoices ---> must be an admin with privellages
-    // Get Specific invoice by id
-    Route::get('/get/invoice/{invoice_id}', [App\Http\Controllers\AdminController::class, 'getInvoice'])->name('get_invoice');
+       // print 
+
+    Route::get('/print/invoice/{invoice_id}', [App\Http\Controllers\InvoicesController::class, 'print'])->name('get_invoices');
+    // for pay invoice ajax needs
+    Route::get('/get/invoice/{invoice_id}', [App\Http\Controllers\InvoicesController::class, 'getInvoice'])->name('get_invoice');
+    // to get payment history record
+    Route::get('/print/record/{record_id}', [App\Http\Controllers\InvoicesController::class, 'getPayHistory'])->name('get_record');
 });

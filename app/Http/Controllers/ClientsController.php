@@ -9,6 +9,7 @@ use App\Models\InvoiceLogs;
 use App\Models\Invoices;
 use App\Models\Packages;
 use App\Traits\Uploads;
+use Illuminate\Support\Arr;
 
 class ClientsController extends Controller
 { 
@@ -87,6 +88,17 @@ class ClientsController extends Controller
   public function getClient($client_id = null){
     if($client_id != null){
       $client = Clients::find($client_id);
+      
+      $payment_array = [];
+
+      foreach($client->boats as $boat){
+
+          $paidInvoices= Invoices::get()->where('is_paid','1')->where('boat_id',$boat->id)->count();
+          $boat = Arr::add($boat,'paidInvoices' ,$paidInvoices);
+
+      }
+
+
   }
   return view('marina_front.clients.client_info',compact('client'));
 

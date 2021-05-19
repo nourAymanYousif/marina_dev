@@ -118,4 +118,5 @@ Route::group([ 'middleware' => ['checkadmin']], function () {
     Route::get('/get/invoice/{invoice_id}', [App\Http\Controllers\InvoicesController::class, 'getInvoice'])->name('get_invoice');
     // to get payment history record
     Route::get('/print/record/{record_id}', [App\Http\Controllers\InvoicesController::class, 'getPayHistory'])->name('get_record');
+    Route::get('/print/crecord/{record_id}', [App\Http\Controllers\InvoicesController::class, 'getPayHistoryClient'])->name('get_record2');
 });

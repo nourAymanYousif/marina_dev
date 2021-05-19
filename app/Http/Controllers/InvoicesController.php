@@ -23,6 +23,12 @@ class InvoicesController extends Controller
       }
   return view('marina_front.invoice.payment_printTemp',compact('record'));
 }
+  public function getPayHistoryClient($record_id = null){
+    if($record_id !=  null){
+      $record = InvoiceLogs::find($record_id);
+      }
+  return view('marina_front.modals.payment_printTemp',compact('record'));
+}
 
   
   public function print($invoice_id = null){

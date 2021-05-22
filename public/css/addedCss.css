@@ -291,3 +291,7 @@
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
+
+thead input {
+    width: 100%;
+}

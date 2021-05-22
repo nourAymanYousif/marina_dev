@@ -139,14 +139,77 @@
 
 
 
-    $(document).ready(function() {
-    $('#boats_table').DataTable( {
+
+
+
+
+
+
+$(document).ready(function() {
+     
+    var table = $('#boats_table').DataTable( {
+        
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+           
+            {
+                extend: 'print',
+                text:"<i class='fa fa-print'></i> Print Report",
+                exportOptions: {
+
+                    columns: [0,1,2,5,6],
+           
+               },
+                                         
+            },
+            {
+                extend: 'excel',
+                text:"<i class='fa fa-file-excel-o'></i> Export Excel ",
+                exportOptions: {
+
+                    columns: [0,1,2,5,6],
+           
+               },
+                                         
+            },
+            {
+                extend: 'pdf',
+                text:"<i class='fa fa-file-pdf-o'></i> Export PDF ",
+                exportOptions: {
+
+                    columns: [0,1,2,5,6],
+           
+               },
+                                         
+            },
+                                  
+      
+         
+           ],
     } );
+    $('#boats_table thead tr').clone(true).appendTo( '#boats_table thead' );
+
+    // Setup - add a text input to each footer cell
+    $('#boats_table thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search By'+title+'" />' );
+ 
+        $( 'input', this ).on('keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+          
+        } );
+    } );
+
+    //table.destroy();
 } );
+
+
+
 
 </script>
 </html>

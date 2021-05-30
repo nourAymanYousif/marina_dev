@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div style="margin-left:200px"class="container">
         <div class="row justify-content-left">
             <div class="col-lg-4">
 
@@ -31,18 +31,18 @@
     </div>
         <hr>
        <br>
-        <div class="row justify-content-center">
+        <div style="width:1600px;" class="justify-content-center ">
             <div class="col-lg-12">
-                <table id="boats_table" class="display">
+                <table  id="boats_table" class="display"  style="width:100%">
                     <thead>
                         <tr align="center" >
-                            <th>#</th>
-                            <th>Name</th>
-                        <th>Length</th>
-                        <th>Image</th>
-                        <th>Color</th>
-                        <th>Client</th>
-                        <th>Package</th>
+                            <th id="num" name="num" title="num">#</th>
+                            <th id="Name" name="Name"  title="Name">Name</th>
+                        <th id="Length" name="Length"  title="Length">Length</th>
+                        <th id="Image" name="Image"  title="Image">Image</th>
+                        <th id="Color" name="Color"  title="Color">Color</th>
+                        <th id="Client" name="Client"  title="Client">Client</th>
+                        <th id="Package" name="Package"  title="Package" tag="package">Package</th>
                        
                         <th>Action</th>
                     </tr>
@@ -54,7 +54,7 @@
                         @foreach($boats as $boat)
                         <tr align="center" >
                             <td>{{$counter}}</a></td>
-                            <td><a href="#">{{$boat->name}}</a></td>
+                            <td ><a href="#">{{$boat->name}}</a></td>
                                 <td>{{$boat->length}}</td>
 
                                 <!-- Added Handler for the no image uploaded-->

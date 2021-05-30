@@ -43,7 +43,7 @@
                             <div class="row row-printable">
                                 <div class="col-lg-12">
 <br>
-                                    <h2 align="center"> Cash Receipt  Voucher</h2>
+                                    <h2 align="center"> Cash Receipt Voucher</h2>
 <br>
 <br>
                             </div>

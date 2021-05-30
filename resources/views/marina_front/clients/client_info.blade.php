@@ -264,13 +264,13 @@
                                                 @if($invoice->tax != null)
                                                 <td><b>{{$invoice->tax}} %</b> </td>
                                                 @else
-                                                <td>N tax</td>
+                                                <td>No tax</td>
                                                 @endif
                 
                                                 <td><b>{{$invoice->total}} EGP</b> </td>
                                                 <td><b>{{$invoice->paid_amount}} EGP</b> </td>
                                                 @if($invoice->total != null)
-                                                <td>{{$invoice->total- $invoice->paid_amount}}</td>
+                                                <td><b>{{$invoice->total- $invoice->paid_amount}} EGP</b></td>
                                                 @else
                                                 <td>No Invoice</td>
                                                 @endif

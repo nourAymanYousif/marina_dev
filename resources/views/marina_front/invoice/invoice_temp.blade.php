@@ -29,7 +29,12 @@
                                         <li><strong>Invoice</strong> #AAA000{{$invoice->id}}</li>
                                         <li><strong>Invoice Date:</strong>{{\Carbon\Carbon::parse($invoice->created_at )->format(' D: d, M, Y')}}</li>
                                        
-                                        <li><strong>Status:</strong> <span class="label label-danger">UNPAID</span></li>
+                                @if($invoice->is_paid == 0 ) 
+                                <li><strong>Status:</strong> <span class="label label-danger">UNPAID</span></li>
+                                   @else
+                                   <li><strong>Status:</strong> <span class="label label-danger">PAID</span></li>
+
+                                @endif
                                     </ul>
                             </div>
                             <div class="col-md-3  text-left" >
@@ -42,10 +47,15 @@
                             </div>
                             <div class="row row-printable">
                                 <div class="col-lg-12">
-<br>
-                                    <h2 align="center"> Invoice</h2>
-<br>
-<br>
+                        <br>
+                            @if($invoice->is_paid == 0 ) 
+                            <h2 align="center"> Invoice</h2>
+                              @else
+                            <h2 align="center">Cash Receipt Vouter </h2>
+
+                                                            @endif
+                         <br>
+                            <br>
                             </div>
                             </div>
 
@@ -83,7 +93,7 @@
                                                 <th class="text-center">{{$subtotal}} EGP</th>
                                             </tr>
                                             <tr>
-                                                <th colspan="3" class="text-right">VAT:</th>
+                                                <th colspan="3" class="text-right">VAT (Tax):</th>
                                                 <th class="text-center">{{$invoice->tax}} %</th>
                                             </tr>
                                         

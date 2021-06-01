@@ -55,6 +55,22 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header"><b><i class="fa fa-briefcase"> </i> {{ __('Maintenance Actions') }}</b></div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    <a type="button" class="buttonb" href="{{url('/create/maintenance')}}"><span> Maintenance Order</span></a>
+                    <a type="button" class="buttony" href="{{url('/list/maintenance')}}"><span> Maintenance List</span></a>
+                </div>
+            </div>
+        </div>
         </div>
         <hr>
         <div class="row justify-content-center">

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div style="margin-left:200px"class="container">
+    <div class="container">
         <div class="row justify-content-left">
             <div class="col-lg-4">
 
@@ -31,29 +31,34 @@
     </div>
         <hr>
        <br>
-        <div style="width:1600px;" class="justify-content-center ">
+        <div style="width:110%" class="justify-content-center ">
             <div class="col-lg-12">
                 <table  id="boats_table" class="display"  style="width:100%">
                     <thead>
                         <tr align="center" >
-                            <th id="num" name="num" title="num">#</th>
+                            <th >#</th>
                             <th id="Name" name="Name"  title="Name">Name</th>
                         <th id="Length" name="Length"  title="Length">Length</th>
                         <th id="Image" name="Image"  title="Image">Image</th>
                         <th id="Color" name="Color"  title="Color">Color</th>
                         <th id="Client" name="Client"  title="Client">Client</th>
                         <th id="Package" name="Package"  title="Package" tag="package">Package</th>
+                        <th>Status</th>
                        
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                         @php
-                         $counter=1;   
+                         $counter=1;  
+                         $rowColor="#fff";
+                        $icon="";
+                        $title="" 
                         @endphp
                         @foreach($boats as $boat)
-                        <tr align="center" >
-                            <td>{{$counter}}</a></td>
+                      
+                        <tr title="{{$title}}" style="background:{{$rowColor}}" align="center" >
+                            <td>{{$counter}}</td>
                             <td ><a href="#">{{$boat->name}}</a></td>
                                 <td>{{$boat->length}}</td>
 
@@ -119,13 +124,26 @@
 
                                 @endif
                                 
+                                @if($boat->has_main == 1)
+                                <td title= "This Boat Has Maintenance Job Order" data="ok" >  <i  class="fa fa-wrench text-danger"> </i> Has Maintenance </td>
+
+                                @else
+                                <td title= "This Boat Has No Maintenance Job Order" data="m">  <span class="fa fa-check-circle text-success"></span>  Ready</td>
+
+                                @endif
+
+
+                               
                                 <td dir="rtl">
                                     
                                     <div class="row">
-                                        <div class="col-lg-4">
-                                            <a class="btn btn-warning" href="{{url('edit/boat').'/'.$boat->id}}"><i class="fa fa-edit"></i></a> 
+                               
 
-                                    </div>
+                                    <div class="col-lg-4">
+                                        <a class="btn btn-warning" href="{{url('edit/boat').'/'.$boat->id}}"><i class="fa fa-edit"></i></a> 
+
+                                     </div>
+                                     
                                     <div class="col-lg-6">
                                         <form action="{{url('delete/boat').'/'.$boat->id}}" method="POST">
                                             @method('POST')
@@ -133,6 +151,8 @@
                                             <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> </button>               
                                            </form>
                                     </div>
+
+
                                     </div>
                                   
                                    

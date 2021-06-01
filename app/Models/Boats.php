@@ -10,7 +10,7 @@ class Boats extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','length', 'color', 'images','user_id','package_id','client_id'];
+    protected $fillable = ['name','length', 'color', 'images','user_id','package_id','client_id','has_main'];
 
 
 
@@ -35,6 +35,11 @@ class Boats extends Model
     public function invoices(){
 
         return $this->hasMany(Invoices::class,'boat_id');
+
+    }
+    public function maintenance(){
+
+        return $this->hasMany(Maintenance::class,'boat_id');
 
     }
    

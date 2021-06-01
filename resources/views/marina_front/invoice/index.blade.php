@@ -8,8 +8,8 @@
 @endforeach
 @section('content')
 
-<div style="margin-left:170px"class="container">
-    <div class="main-body">
+<div class="container justify-content-center"  >
+    <div class="main-body" >
 
         <div class="row justify-content-left">
             <div class="col-lg-6">
@@ -29,9 +29,9 @@
     </div>
         <hr>
        <br>
-        <div  style="width:1600px;" class="row justify-content-center">
-            <div class="col-lg-12">
-                <table id="invoices_table"  class="cell-border"  style="width:100%">
+        <div  style=" overflow-x:auto; width:110%; margin-right:100px"  class="row justify-content-left">
+            <div class="col-xl-12" >
+                <table  id="invoices_table"  style=" width:110%;" class="cell-border"   style="">
                     <thead>
                     <tr align="center" >
                        

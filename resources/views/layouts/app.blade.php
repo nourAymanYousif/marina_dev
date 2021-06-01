@@ -121,6 +121,8 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+   
     </div>
 </body>
 @if(auth()->user() != null)
@@ -130,6 +132,89 @@
    
     
     $(document).ready(function() {
+     
+     var tablein = $('#maintenance_table').DataTable( {
+         
+         dom: 'Bfrtip',
+         buttons: [
+            
+             {
+                 extend: 'print',
+                 messageTop: '<p><span class="fa fa-user"></span> Requested User: <b>{{auth()->user()->name}}</b> <br> <span class="fa fa-calendar"></span> {{\Carbon\Carbon::now()->format("d/m/Y")}} <br><span class="fa fa-clock-o"></span> {{\Carbon\Carbon::now()->format("g:i A")}}</p>',
+                 title:'Maintenance Report',
+                 
+
+                 text:"<i class='fa fa-print'></i> Print Report",
+                 exportOptions: {
+ 
+                    columns: [0,1,2,3,4,5],
+            
+                },
+                                      
+             },
+             {
+                 extend: 'excel',
+                 
+                 messageTop: 'Requested User: {{auth()->user()->name}} Date: {{\Carbon\Carbon::now()->format("d/m/Y")}} Time: {{\Carbon\Carbon::now()->format("g:i A")}}',
+                 title:'Maintenance Report',
+                 
+                 text:"<i class='fa fa-file-excel-o'></i> Export Excel ",
+                 exportOptions: {
+ 
+                    columns: [0,1,2,3,4,5],
+            
+                },
+                                          
+             },
+             {
+                 extend: 'pdf',
+                 
+                 messageTop: 'Requested User: {{auth()->user()->name}} Date: {{\Carbon\Carbon::now()->format("d/m/Y")}} Time: {{\Carbon\Carbon::now()->format("g:i A")}}',
+                 title:'Maintenance Report',
+                 
+                 text:"<i class='fa fa-file-pdf-o'></i> Export PDF ",
+                 exportOptions: {
+ 
+                    columns: [0,1,2,3,4,5],
+            
+                },
+                                          
+             },
+                                   
+       
+          
+            ],
+     } );
+     $('#maintenance_table thead tr').clone(true).appendTo('#maintenance_table thead');
+ 
+     // Setup - add a text input to each footer cell
+     $('#maintenance_table thead tr:eq(1) th').each( function (i) {
+         var title = $(this).text();
+         $(this).html( '<input type="text" placeholder="Search By'+title+'" />' );
+  
+         $( 'input', this ).on('keyup change', function () {
+             if ( tablein.column(i).search() !== this.value ) {
+                tablein
+                     .column(i)
+                     .search( this.value )
+                     .draw();
+             }
+           
+         } );
+     } );
+ 
+     //table.destroy();
+ } );
+ 
+ 
+
+
+
+
+// invoices table ini datatable
+
+  
+$(document).ready(function() {
      
      var tablein = $('#packages_table').DataTable( {
          
@@ -210,8 +295,6 @@
 
 
 // invoices table ini datatable
-
-
 
   
     $(document).ready(function() {

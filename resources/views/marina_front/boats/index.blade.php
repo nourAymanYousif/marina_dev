@@ -1,5 +1,12 @@
 @extends('layouts.app')
+@if($boats -> count() > 0)
+@foreach($boats as $boat)
+@if($boat->maintenance-> count() > 0)
+@include('marina_front.modals.mainHistory_modal')
+@endif
 
+@endforeach
+@endif
 @section('content')
 
     <div class="container">
@@ -59,7 +66,7 @@
                       
                         <tr title="{{$title}}" style="background:{{$rowColor}}" align="center" >
                             <td>{{$counter}}</td>
-                            <td ><a href="#">{{$boat->name}}</a></td>
+                            <td ><a href="#" data-toggle="modal" data-target="#mainHistory{{$boat->id}}">{{$boat->name}}</a></td>
                                 <td>{{$boat->length}}</td>
 
                                 <!-- Added Handler for the no image uploaded-->
@@ -73,9 +80,9 @@
 
                                         <img id="myImg{{$boat_image}}" style="width: 50px" src="{{url('/boats')}}/{{$boat_image}}">
                                             
-                                        <div id="myModal{{$boat_image}}" class="modal">
+                                        <div id="myModal{{$boat_image}}" class="modal-Image">
                                             <span id="cl{{$boat_image}}"class="close">&times;</span>
-                                            <img class="modal-content" id="img01{{$boat_image}}">
+                                            <img class="modal-Image-content" id="img01{{$boat_image}}">
                                             <div id="caption"></div>
                                           </div>
 
@@ -164,7 +171,10 @@
                 </table>
             </div>
         </div>
-    </div>
+     
+
+<!-- Modal -->
+
 <!-- To make the  alert hide after Specific Time -->
     <script>
     window.setTimeout(function() {

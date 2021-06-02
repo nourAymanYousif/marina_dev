@@ -70,9 +70,9 @@
     
                                             <img id="myImg{{$client_image}}" style="width: 50px" src="{{url('/clients')}}/{{$client_image}}">
                                             
-                                            <div id="myModal{{$client_image}}" class="modal">
+                                            <div id="myModal{{$client_image}}" class="modal-Image">
                                                 <span id="cl{{$client_image}}"class="close">&times;</span>
-                                                <img class="modal-content" id="img01{{$client_image}}">
+                                                <img class="modal-Image-content" id="img01{{$client_image}}">
                                                 <div id="caption"></div>
                                               </div>
 
@@ -146,7 +146,13 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
 
+    $('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});
+    </script>
     <script>
         window.setTimeout(function() {
         $(".alerty").fadeTo(500, 0).slideUp(500, function(){

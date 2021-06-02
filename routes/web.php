@@ -99,6 +99,24 @@ Route::group([ 'middleware' => ['checkadmin']], function () {
     
     // Get Specific boat by id 
 
+
+      // --------------------------------------------------[ Maintenance] -----------------------------------------------
+    //Show Maintenance form -- create Maintenance
+    Route::get('/create/maintenance', [App\Http\Controllers\MaintenanceController::class, 'showCreateMaintenance'])->name('create_maintenance');
+    Route::post('/create/maintenance', [App\Http\Controllers\MaintenanceController::class, 'createMaintenance']);
+    
+    //Show Edit Maintenance form -- update Maintenance                      
+    Route::get('/edit/maintenance/{maintenance_id}', [App\Http\Controllers\MaintenanceController::class, 'edit']);
+    Route::post('/edit/maintenance', [App\Http\Controllers\MaintenanceController::class, 'update'])->name('edit_maintenance');
+   
+    // Show All Maintenance                                             
+    Route::get('/list/maintenance', [App\Http\Controllers\MaintenanceController::class, 'index'])->name('list_maintenance');
+    
+    //Delete Maintenance           ---> must be an admin with privellages                            
+    Route::post('/delete/maintenance/{maintenance_id}', [App\Http\Controllers\MaintenanceController::class, 'delete']);
+    Route::post('/complete/maintenance/{maintenance_id}', [App\Http\Controllers\MaintenanceController::class, 'closeMaintenance']);
+    
+
     // --------------------------------------------------[ Invoices] -----------------------------------------------
     //Show Create invoice form -- create invoice
     Route::get('/create/invoice', [App\Http\Controllers\AdminController::class, 'showCreateInvoice'])->name('create_invoice');

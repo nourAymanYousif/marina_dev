@@ -241,7 +241,15 @@ $(document).ready(function() {
      // Setup - add a text input to each footer cell
      $('#invoices_table thead tr:eq(1) th').each( function (i) {
          var title = $(this).text();
-         $(this).html( '<input type="text" placeholder="Search By'+title+'" />' );
+
+         if (title === "Issue Date") {
+        
+        $(this).html( '<input data-provide="datepicker" data-date-format="dd/mm/yyyy" type="text" id="datepicker" placeholder="Search '+title+'"  />' );
+        }else {
+
+        $(this).html( '<input id='+title+'type="text" placeholder="Search By'+title+'" />' );
+       }    
+
   
          $( 'input', this ).on('keyup change', function () {
              if ( tablein.column(i).search() !== this.value ) {

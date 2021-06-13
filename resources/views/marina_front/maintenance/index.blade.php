@@ -68,7 +68,7 @@
                             <td>{{$counter}}</a></td>
                                 <td>{{\Carbon\Carbon::parse($one_maintenance->created_at )->format('d/m/Y')}}</td>
                                 <td>{{$one_maintenance->description}}</td>
-                                <td>{{$one_maintenance->price}}</td>
+                                <td><b>{{$one_maintenance->price}} EGP</b></td>
                                 <td>{{$one_maintenance->boat->name}}</td>
                                 <td>{{$one_maintenance->boat->client->name}}</td>
                                 @if($one_maintenance->end_date != null)
@@ -126,8 +126,7 @@
                     </tbody>
                 </table>
           
-     
-
+          
             </div>
         </div>
 

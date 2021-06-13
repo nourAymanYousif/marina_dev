@@ -149,9 +149,9 @@
 }
 
 
-/* The Modal (background) */
+/* The modalImage (background) */
 
-.modal {
+.modal-Image {
     display: none;
     /* Hidden by default */
     position: fixed;
@@ -175,9 +175,9 @@
 }
 
 
-/* Modal Content (image) */
+/* modalImage Content (image) */
 
-.modal-content {
+.modal-Image-content {
     margin: auto;
     display: block;
     width: 80%;
@@ -185,7 +185,7 @@
 }
 
 
-/* Caption of Modal Image */
+/* Caption of modalImage Image */
 
 #caption {
     margin: auto;
@@ -201,7 +201,7 @@
 
 /* Add Animation */
 
-.modal-content,
+.modal-Image-content,
 #caption {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
@@ -251,7 +251,7 @@
 /* 100% Image Width on Smaller Screens */
 
 @media only screen and (max-width: 700px) {
-    .modal-content {
+    .modalImage-content {
         width: 100%;
     }
 }

@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('checkadmin');
+        $this->middleware('admins');
     }
 
     /**
@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:2', 'confirmed'],
-            'national_id' => ['required'],
+            'mobile' => ['required', 'number', 'min:11', 'unique:users'],
         ]);
     }
 
@@ -72,7 +72,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'national_id' => $data['national_id'],
             'mobile'    => $data['mobile'],
-            'national_id_image' => $data['national_id_image'],
         ]);
     }
 }

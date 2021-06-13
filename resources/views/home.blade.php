@@ -1,7 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
+    @if(Session::has('accessMsg'))               
+    <div class="row justify-content-center">
+
+    <div class="col-lg-6 " align="center" >
+       
+        <div class="alert alert-danger alerty text-left" role="alert" data-auto-dismiss="500">
+            <strong> <i class="fa fa-exclamation-triangle"></i></strong> {!!Session::get('accessMsg')!!}
+          </div>
+          </div>
+                     
+       
+    </div> @endif
     <div class="row justify-content-center">
         <div class="col-lg-3">
             <div class="card">
@@ -102,4 +115,12 @@
     </div>
 
 </div>
+
+<script>
+    window.setTimeout(function() {
+    $(".alerty").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+    </script>
 @endsection

@@ -32,16 +32,18 @@ Auth::routes();
 
 
 
-Route::group([ 'middleware' => ['checkadmin']], function () {
+Route::group([ 'middleware' => ['auth']], function () {
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // --------------------------------------------------[ Users] -----------------------------------------------
     // Creat User Account (Admin unlinked yet)
-    Route::get('create/user', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::group([ 'middleware' => ['admins']], function () {
+
+    Route::get('create/user', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('create_admin');
     Route::post('create/user', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
-
+   });
 
     // --------------------------------------------------[ Clients] -----------------------------------------------
     //Show client form  -- Create Clients
@@ -81,6 +83,7 @@ Route::group([ 'middleware' => ['checkadmin']], function () {
 
     // Get Specific boat by id 
 
+    Route::group([ 'middleware' => ['rateAdmins']], function () {
 
     // --------------------------------------------------[ Packages] -----------------------------------------------
     //Show package form -- create Package
@@ -98,7 +101,7 @@ Route::group([ 'middleware' => ['checkadmin']], function () {
     Route::post('/delete/package/{package_id}', [App\Http\Controllers\PackagesController::class, 'delete']);
     
     // Get Specific boat by id 
-
+   });
 
       // --------------------------------------------------[ Maintenance] -----------------------------------------------
     //Show Maintenance form -- create Maintenance

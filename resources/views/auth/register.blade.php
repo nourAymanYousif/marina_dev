@@ -62,8 +62,9 @@
                             <div class="col-md-6">
                                <select class="form-control " name="type" id="type">
                                     <option value="">Please Select Type</option>
-                                    <option value="admin">Administrator</option>
-                                    <option value="accountant">Accountant</option>
+                                    <option value="admin">Top Admin</option>
+                                    <option value="rateController">Package Controller</option>
+                                    <option value="dataEntry">Data Entry</option>
                                </select>
                                 @error('type')
                                 <span class="invalid-feedback" role="alert">
@@ -73,54 +74,7 @@
                             </div>
                         </div>
                         {{--national_id_images--}}
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('National ID image') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="national_id_image" type="file"  class="form-control @error('national_id_image') is-invalid @enderror" name="national_id_image" value="{{ old('national_id_image') }}" >
-
-                                @error('national_id_image')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-
-                        {{--National_id--}}
-
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="national_id" type="number"  min="14" max="14" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ old('national_id') }}" required >
-
-                                @error('national_id')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    
 
 
 

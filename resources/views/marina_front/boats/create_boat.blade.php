@@ -31,7 +31,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Length') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="length" type="number" min="0" class="form-control @error('length') is-invalid @enderror" name="length" value="{{ old('length') }}" required >
+                                    <input id="length" type="number" step="0.01" min="0" class="form-control @error('length') is-invalid @enderror" name="length" value="{{ old('length') }}" required >
 
                                     @error('length')
                                     <span class="invalid-feedback" role="alert">

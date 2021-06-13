@@ -16,9 +16,9 @@ class AdminPagesAccess
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->type != 'admin') {
-            return redirect('/');
-        }
+        if (auth()->user()->type != 'rateController' && auth()->user()->type != 'adminCreator' ) {
+            return redirect()->back()->with('accessMsg','<b>Sorry</b> You do not have permission to access this route :( ');
+                }
 
         return $next($request);
     }

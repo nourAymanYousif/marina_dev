@@ -37,6 +37,7 @@
                     <thead>
                         <tr align="center" >
                             <th >#</th>
+                            <th id="Name" name="Name"  title="Name">Register date</th>
                             <th id="Name" name="Name"  title="Name">Name</th>
                         <th id="Length" name="Length"  title="Length">Length</th>
                         <th id="Image" name="Image"  title="Image">Image</th>
@@ -59,6 +60,8 @@
                       
                         <tr title="{{$title}}" style="background:{{$rowColor}}" align="center" >
                             <td>{{$counter}}</td>
+                            <td>{{\Carbon\Carbon::parse($boat->created_at )->format('d/m/Y')}}</td>
+
                             <td ><a href="#">{{$boat->name}}</a></td>
                                 <td>{{$boat->length}}</td>
 

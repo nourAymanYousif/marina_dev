@@ -38,8 +38,8 @@ class ClientsController extends Controller
     //        dd('test');
 
       $rules = $this->validate($request, [
-          'email' => 'required|email',
-          'national_id' => 'required',
+          'email' => 'required|unique:client',
+          'national_id' => 'required|unique:client|size:14',
           'mobile' => 'required|unique:client',
       ]);
 
